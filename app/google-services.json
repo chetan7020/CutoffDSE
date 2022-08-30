@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "645908148982",
+    "project_id": "cutoff-dse-40598",
+    "storage_bucket": "cutoff-dse-40598.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645908148982:android:c1fcea2788dcd1edaf32d7",
+        "android_client_info": {
+          "package_name": "com.example.cutoffdse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645908148982-82bkq87nr60fu2thrt1vmn059ppr1q3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1U-o0pYYv_Cn4wNmLn1X0kQCwQ_vt9wM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645908148982-82bkq87nr60fu2thrt1vmn059ppr1q3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

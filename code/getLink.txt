@@ -1,0 +1,31 @@
+       private StorageReference storageReference, listRef;
+       storageReference = FirebaseStorage.getInstance().getReference().child("/2021-22/cap1");
+
+----------------------------------------------------------------------------------------------------
+
+       storageReference.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult) {
+                for (StorageReference item : listResult.getItems()) {
+                    Log.d("tag" , item.getName()) ;
+                    Log.d("tag" , String.valueOf(item.getDownloadUrl())) ;
+                    StorageReference fileReferance = storageReference.child(item.getName()) ;
+                    fileReferance.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("link", uri.toString());
+
+                            firebaseFirestore.collection("2021-22_Cap-1")
+                                    .add(data) ;
+                            Log.d("tag" , uri.toString()) ;
+                        }
+                    });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("error", e.getMessage());
+            }
+        });
