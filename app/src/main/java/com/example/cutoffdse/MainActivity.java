@@ -1,19 +1,37 @@
 package com.example.cutoffdse;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class MainActivity extends AppCompatActivity {
 
-    private CardView cv1819, cv1920, cv2021, cv2122, cv2223, cvSettings;
+    private CardView cvImportantDates, cvListOfFC, cv2122, cv2223, cvSettings;
+    private FirebaseFirestore firebaseFirestore;
+
+    private void initialize() {
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        cvImportantDates = findViewById(R.id.cvImportantDates);
+        cvListOfFC = findViewById(R.id.cvListOfFC);
+        cv2122 = findViewById(R.id.cv2122);
+        cv2223 = findViewById(R.id.cv2223);
+        cvSettings = findViewById(R.id.cvSettings);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,24 +40,17 @@ public class MainActivity extends AppCompatActivity {
 
         initialize();
 
-        cv1819.setOnClickListener(new View.OnClickListener() {
+        cvImportantDates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                method1819();
+                methodImportantDates();
             }
         });
 
-        cv1920.setOnClickListener(new View.OnClickListener() {
+        cvListOfFC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                method1920();
-            }
-        });
-
-        cv2021.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                method2021();
+                methodListOfFC();
             }
         });
 
@@ -71,63 +82,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void method2223() {
-        makeToast("Coming Soon");
+
+        firebaseFirestore.collection("2022-23")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (String.valueOf(value.getDocuments().stream().count()).equals("0")) {
+                            makeToast("Coming Soon");
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, DataActivity.class);
+                            intent.putExtra("year", "2022-23");
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 
     private void method2122() {
-        createDialog("2021-22") ;
+        Intent intent = new Intent(MainActivity.this, DataActivity.class);
+        intent.putExtra("year", "2021-22");
+        startActivity(intent);
     }
 
-    private void method1920() {
-        makeToast("Yet to Build - 2019-20"); ;
+    private void methodListOfFC() {
+        makeToast("List of FC");
     }
 
-    private void method2021() {
-        makeToast("Yet to Build - 2020-21"); ;
-    }
-
-    private void method1819() {
-        makeToast("Yet to Build - 2018-19");
-    }
-
-    private void createDialog(String year) {
-        final int[] checkedItem = {-1};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Choose Cap Round");
-
-        final String[] strings = new String[]{"Cap-1", "Cap-2"};
-
-        builder.setSingleChoiceItems(strings, checkedItem[0], new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                checkedItem[0] = which;
-                dialog.dismiss();
-
-                Intent intent = new Intent(MainActivity.this , DataActivity.class) ;
-                intent.putExtra("year" , year) ;
-                intent.putExtra("cap" , strings[which]) ;
-                startActivity(intent) ;
-            }
-        });
-
-        AlertDialog customAlertDialog = builder.create();
-        customAlertDialog.show();
+    private void methodImportantDates() {
+        startActivity(new Intent(MainActivity.this, ImportantDates.class));
     }
 
     private void makeToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void initialize() {
 
-        cv1819 = findViewById(R.id.cv1819);
-        cv1920 = findViewById(R.id.cv1920);
-        cv2021 = findViewById(R.id.cv2021);
-        cv2122 = findViewById(R.id.cv2122);
-        cv2223 = findViewById(R.id.cv2223);
-        cvSettings = findViewById(R.id.cvSettings);
-
-    }
 }
