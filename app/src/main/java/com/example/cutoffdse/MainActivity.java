@@ -18,7 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView cvImportantDates, cvListOfFC, cv2122, cv2223, cvSettings;
+    private CardView cvImportantDates, cvListOfFC, cv2122, cv2223, cvCollege;
     private FirebaseFirestore firebaseFirestore;
 
     private void initialize() {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         cvListOfFC = findViewById(R.id.cvListOfFC);
         cv2122 = findViewById(R.id.cv2122);
         cv2223 = findViewById(R.id.cv2223);
-        cvSettings = findViewById(R.id.cvSettings);
+        cvCollege = findViewById(R.id.cvCollege);
 
     }
 
@@ -68,17 +68,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cvSettings.setOnClickListener(new View.OnClickListener() {
+        cvCollege.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                methodSettings();
+                methodCollege();
             }
         });
 
     }
 
-    private void methodSettings() {
-        makeToast("Settings");
+    private void methodCollege() {
+        startActivity(new Intent(MainActivity.this , CollegeInfoActivity.class));
     }
 
     private void method2223() {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void methodListOfFC() {
-        makeToast("List of FC");
+        startActivity(new Intent(MainActivity.this, FCList.class));
     }
 
     private void methodImportantDates() {

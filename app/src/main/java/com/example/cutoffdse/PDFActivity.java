@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class PDFActivity extends AppCompatActivity {
 
-    PDFView pdfView;
+    private PDFView pdfView;
     String link;
 
     @Override
@@ -52,8 +54,15 @@ public class PDFActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(InputStream inputStream) {
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
+        @Override
+        protected void onPostExecute(InputStream inputStream) {
+            CircularProgressIndicator pbLoader = findViewById(R.id.pbLoader);
+            pbLoader.setVisibility(View.GONE);
+            pdfView.setVisibility(View.VISIBLE);
             pdfView.fromStream(inputStream).load();
 
             super.onPostExecute(inputStream);

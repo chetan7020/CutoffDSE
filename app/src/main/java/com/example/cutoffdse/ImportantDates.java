@@ -1,12 +1,16 @@
 package com.example.cutoffdse;
 
+import static com.example.cutoffdse.R.id.svSearch;
+
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -39,6 +43,8 @@ public class ImportantDates extends AppCompatActivity {
                         }
                     }
                 });
+
+
     }
 
     private void addRow(String activity, String start_date, String end_date) {
@@ -49,9 +55,9 @@ public class ImportantDates extends AppCompatActivity {
         TextView tvStartDate = view.findViewById(R.id.tvStartDate);
         TextView tvEndDate = view.findViewById(R.id.tvEndDate);
 
-        tvActivity.setText(activity);
-        tvStartDate.setText(start_date);
-        tvEndDate.setText(end_date);
+        tvActivity.setText(activity.trim());
+        tvStartDate.setText(start_date.trim());
+        tvEndDate.setText(end_date.trim());
 
         tlRow.addView(view);
     }
