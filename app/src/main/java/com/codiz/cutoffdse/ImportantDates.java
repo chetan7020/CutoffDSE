@@ -1,16 +1,14 @@
-package com.example.cutoffdse;
+package com.codiz.cutoffdse;
 
-import static com.example.cutoffdse.R.id.svSearch;
+import static com.codiz.cutoffdse.R.id.svSearch;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;

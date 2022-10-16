@@ -1,4 +1,4 @@
-package com.example.cutoffdse;
+package com.codiz.cutoffdse;
 
 import org.junit.Test;
 

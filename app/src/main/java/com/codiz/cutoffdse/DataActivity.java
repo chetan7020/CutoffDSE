@@ -1,4 +1,4 @@
-package com.example.cutoffdse;
+package com.codiz.cutoffdse;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,19 +23,30 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class CollegeInfoActivity extends AppCompatActivity {
+public class DataActivity extends AppCompatActivity {
 
+    private Intent intent;
+    private String year;
     private LinearLayout linearLayout;
     private FirebaseFirestore firebaseFirestore;
+    private TextView tvInfo;
     private androidx.appcompat.widget.SearchView svSearch;
     private View view;
+    private CircularProgressIndicator pbLoader;
 
     private void initialize() {
+        tvInfo = findViewById(R.id.tvInfo);
+
         linearLayout = findViewById(R.id.llData);
+
+        intent = getIntent();
+        year = intent.getStringExtra("year");
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         svSearch = findViewById(R.id.svSearch);
+
+        pbLoader = findViewById(R.id.pbLoader);
 
     }
 
@@ -48,7 +58,9 @@ public class CollegeInfoActivity extends AppCompatActivity {
 
         initialize();
 
-        firebaseFirestore.collection("collegeInfo")
+        tvInfo.setText(year);
+
+        firebaseFirestore.collection(year)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -59,13 +71,13 @@ public class CollegeInfoActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String instituteCode = String.valueOf(document.get("instituteCode"));
                                 String collegeName = String.valueOf(document.get("collegeName"));
-                                String link = String.valueOf(document.get("link"));
+                                String cap1 = String.valueOf(document.get("cap1"));
+                                String cap2 = String.valueOf(document.get("cap2"));
 
-                                createCard(instituteCode, collegeName, link);
+                                createCard(instituteCode, collegeName, cap1, cap2);
                             }
 
                             linearLayout.setVisibility(View.VISIBLE);
-                            CircularProgressIndicator pbLoader = findViewById(R.id.pbLoader);
                             pbLoader.setVisibility(View.GONE);
 
                         } else {
@@ -106,8 +118,8 @@ public class CollegeInfoActivity extends AppCompatActivity {
 
     }
 
-    private void createCard(String instituteCode, String collegeName, String link) {
-        view = getLayoutInflater().inflate(R.layout.college_info_card_design_layout, null, false);
+    private void createCard(String instituteCode, String collegeName, String cap1, String cap2) {
+        view = getLayoutInflater().inflate(R.layout.data_card_design_layout, null, false);
 
         TextView tvInstituteCode = view.findViewById(R.id.tvInstituteCode);
         TextView tvCollegeName = view.findViewById(R.id.tvCollegeName);
@@ -133,6 +145,27 @@ public class CollegeInfoActivity extends AppCompatActivity {
         tvInstituteCode.setText(instituteCode);
         tvCollegeName.setText(collegeName);
 
+        Button btnCap1 = view.findViewById(R.id.btnCap1);
+        Button btnCap2 = view.findViewById(R.id.btnCap2);
+
+        btnCap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DataActivity.this, PDFActivity.class);
+                intent.putExtra("link", cap1);
+                startActivity(intent);
+            }
+        });
+
+        btnCap2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DataActivity.this, PDFActivity.class);
+                intent.putExtra("link", cap2);
+                startActivity(intent);
+            }
+        });
+
         linearLayout.addView(view);
     }
 
@@ -140,11 +173,6 @@ public class CollegeInfoActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(link));
         startActivity(i);
-    }
-
-
-    private void makeToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 }
