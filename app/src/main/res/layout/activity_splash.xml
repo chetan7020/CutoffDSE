@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".SplashActivity">
+    tools:context="com.codizcdp.cutoffdse.SplashActivity">
 
     <ImageView
         android:layout_width="200dp"

@@ -16,8 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CutoffDSE"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1633130796309608~6509456730"/>
+
         <activity
-            android:name=".SplashActivity"
+            android:name="com.codizcdp.cutoffdse.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,34 +31,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CollegeInfoActivity"
+            android:name="com.codizcdp.cutoffdse.ImportantDates"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".FCList"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ImportantDates"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PDFActivity"
+            android:name="com.codizcdp.cutoffdse.PDFActivity"
             android:exported="false" />
         <activity
-            android:name=".DataActivity"
+            android:name="com.codizcdp.cutoffdse.DataActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.codizcdp.cutoffdse.MainActivity"
             android:exported="false">
 
         </activity>

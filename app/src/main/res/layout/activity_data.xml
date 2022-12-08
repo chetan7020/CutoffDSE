@@ -7,7 +7,14 @@
     android:layout_height="match_parent"
     android:background="#f5e8da"
     android:orientation="vertical"
-    tools:context=".DataActivity">
+    tools:context="com.codizcdp.cutoffdse.DataActivity">
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-1633130796309608/2869594621"/>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svSearch"
@@ -18,8 +25,7 @@
         android:layout_marginEnd="20dp"
         android:background="@color/white"
         android:queryHint="Search Here"
-        />
-
+        app:iconifiedByDefault="false" />
 
     <TextView
         android:id="@+id/tvInfo"
@@ -31,8 +37,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="College Info"
         android:textColor="@color/black"
-        android:textSize="32sp"
-        />
+        android:textSize="32sp" />
 
 
     <androidx.core.widget.NestedScrollView

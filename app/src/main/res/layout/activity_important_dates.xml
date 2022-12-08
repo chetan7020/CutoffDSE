@@ -5,14 +5,22 @@
     android:layout_height="match_parent"
     android:background="#f5e8da"
     android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".ImportantDates">
+    tools:context="com.codizcdp.cutoffdse.ImportantDates">
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-1633130796309608/9070123548"/>
 
     <TextView
         android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Important Dates"
         android:textColor="@color/black"
@@ -20,11 +28,11 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
 
-        <TableRow
-            android:background="#01ba8e"
-            >
+        <TableRow android:background="#01ba8e">
 
             <TextView
                 android:layout_width="0dp"
@@ -39,8 +47,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:gravity="center"
                 android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
                 android:padding="5dp"
                 android:text="Schedule"
                 android:textColor="@color/white"
@@ -48,18 +56,16 @@
 
         </TableRow>
 
-        <TableRow
-            android:background="#01ba8e"
-            >
+        <TableRow android:background="#01ba8e">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-10dp"
                 android:layout_weight="5"
+                android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:padding="5dp"
-                android:fontFamily="@font/poppins_medium"
                 android:text="Activity"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -68,9 +74,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
+                android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:padding="5dp"
-                android:fontFamily="@font/poppins_medium"
                 android:text="Start\nDate"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -79,9 +85,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
+                android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:padding="5dp"
-                android:fontFamily="@font/poppins_medium"
                 android:text="End\nDate"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -97,7 +103,9 @@
         <TableLayout
             android:id="@+id/tlRow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
 
     </androidx.core.widget.NestedScrollView>
 

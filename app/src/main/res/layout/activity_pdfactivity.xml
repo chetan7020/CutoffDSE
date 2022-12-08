@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".PDFActivity">
+    tools:context="com.codizcdp.cutoffdse.PDFActivity">
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
